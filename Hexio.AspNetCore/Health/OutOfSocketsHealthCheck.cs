@@ -6,7 +6,7 @@ namespace Hexio.AspNetCore.Health
 {
     public class OutOfSocketsHealthCheck : IHealthCheck
     {
-        public static bool OutOfSockets = true; 
+        public static bool OutOfSockets = false; 
         
         public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = new CancellationToken())
         {
