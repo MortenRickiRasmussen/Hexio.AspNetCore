@@ -63,8 +63,6 @@ namespace Hexio.AspNetCore.Logging
                 }
 
                 Serilog.Debugging.SelfLog.Enable(Console.Out);
-
-                var environmentName = hostingContext.Configuration.GetValue<string>("ASPNETCORE_ENVIRONMENT");
                 
                 loggerConfiguration
                     .MinimumLevel.Information()
@@ -72,7 +70,7 @@ namespace Hexio.AspNetCore.Logging
                     .Enrich.With<ServiceNameEnricher>()
                     .Enrich.With<RestEaseExceptionEnricher>()
                     .Enrich.With<OutOfSocketsEnricher>()
-                    .Enrich.With(new EnvironmentEnricher(environmentName))
+                    .Enrich.With(new EnvironmentEnricher(hostingContext.HostingEnvironment.EnvironmentName))
                     .Enrich.FromLogContext()
                     .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(settings.Url))
                     {
