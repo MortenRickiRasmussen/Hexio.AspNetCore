@@ -8,15 +8,7 @@ namespace Hexio.AspNetCore.Demo
     {
         public static void Main(string[] args)
         {
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder
-                        .UseStartup<Startup>()
-                        .UseKestrel(options => options.AddServerHeader = false)
-                        .UseHexioDefaults();
-                })
-                .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+            Host.CreateDefaultBuilder(args).ConfigureWebHostHexioDefaults<Startup>()
                 .Build()
                 .Run();
         }

@@ -17,13 +17,14 @@ namespace Hexio.AspNetCore.Demo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHexioHealthChecks();
+            services.AddControllers();
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
             }
 
             app.UseRouting();
@@ -31,6 +32,7 @@ namespace Hexio.AspNetCore.Demo
             
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapDefaultControllerRoute();
                 endpoints.MapHealthChecks("/health");
             });
             
